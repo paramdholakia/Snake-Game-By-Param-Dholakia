@@ -1,29 +1,24 @@
 // Author: Param Dholakia
-
 const gameBoard = document.querySelector("#game-board");
 const ctx = gameBoard.getContext("2d");
 const scoreText = document.querySelector("#score-text");
-const resetButton = document.querySelector("#reset-btn"); // Fixed ID
-
+const resetButton = document.querySelector("#reset-btn"); 
 // Color constants matching Nokia theme
 const COLORS = {
     boardBg: "#0f380f",
     snakeBody: "#9bbc0f",
     snakeBorder: "#8bac0f",
-    food: "#306230",
+    food: "red",
     text: "#9bbc0f"
 };
-
 const WIDTH = gameBoard.width;
 const HEIGHT = gameBoard.height;
 const UNIT_SIZE = 25;
-
 let running = false;
 let xVelocity = UNIT_SIZE;
 let yVelocity = 0;
 let foodX, foodY;
 let score = 0;
-
 let snake = [
     { x: UNIT_SIZE * 4, y: 0 },
     { x: UNIT_SIZE * 3, y: 0 },
@@ -31,12 +26,17 @@ let snake = [
     { x: UNIT_SIZE, y: 0 },
     { x: 0, y: 0 }
 ];
+let directionChanged = false; // Flag to prevent multiple direction changes in one frame
 
 window.addEventListener("keydown", changeDirection);
 resetButton.addEventListener("click", resetGame);
 
 gameStart();
 
+// Disable right click
+document.addEventListener("contextmenu", event => event.preventDefault());
+// Disable text selection
+document.onselectstart = () => false;
 function gameStart() {
     running = true;
     scoreText.textContent = score;
@@ -52,6 +52,7 @@ function nextTick() {
             moveSnake();
             drawSnake();
             checkGameOver();
+            directionChanged = false; // Reset direction change flag
             nextTick();
         }, 100);
     } else {
@@ -90,7 +91,6 @@ function drawSnake() {
 function moveSnake() {
     const head = { x: snake[0].x + xVelocity, y: snake[0].y + yVelocity };
     snake.unshift(head);
-
     if (head.x === foodX && head.y === foodY) {
         score += 1;
         scoreText.textContent = score;
@@ -101,35 +101,39 @@ function moveSnake() {
 }
 
 function changeDirection(event) {
+    if (directionChanged) return; // If direction has already been changed this frame, do nothing
     const keyPressed = event.keyCode;
     const goingUp = yVelocity === -UNIT_SIZE;
     const goingDown = yVelocity === UNIT_SIZE;
     const goingRight = xVelocity === UNIT_SIZE;
     const goingLeft = xVelocity === -UNIT_SIZE;
-
     switch (keyPressed) {
         case 37: // Left
             if (!goingRight) {
                 xVelocity = -UNIT_SIZE;
                 yVelocity = 0;
+                directionChanged = true; // Set direction change flag
             }
             break;
         case 38: // Up
             if (!goingDown) {
                 xVelocity = 0;
                 yVelocity = -UNIT_SIZE;
+                directionChanged = true; // Set direction change flag
             }
             break;
         case 39: // Right
             if (!goingLeft) {
                 xVelocity = UNIT_SIZE;
                 yVelocity = 0;
+                directionChanged = true; // Set direction change flag
             }
             break;
         case 40: // Down
             if (!goingUp) {
                 xVelocity = 0;
                 yVelocity = UNIT_SIZE;
+                directionChanged = true; // Set direction change flag
             }
             break;
     }
@@ -146,7 +150,6 @@ function checkGameOver() {
     const hitSelf = snake
         .slice(1)
         .some(part => part.x === head.x && part.y === head.y);
-
     if (hitWall || hitSelf) {
         running = false;
     }

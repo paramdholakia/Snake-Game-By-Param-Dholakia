@@ -1,5 +1,5 @@
 :root {
-    --bg-color: #0f380f;
+    --bg-color: #092309;
     --game-container-bg: #0f380f;
     --board-border: #306230;
     --board-bg: #8bac0f;
@@ -14,6 +14,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Press Start 2P', cursive;
+    cursor: default;
 }
 
 body {
@@ -39,7 +40,7 @@ body {
 }
 
 #score-text {
-    font-size: 1.5rem;
+    font-size: 5rem;
     color: var(--text-color);
     margin: 1rem 0;
 }
@@ -58,4 +59,17 @@ body {
 #reset-btn:hover {
     background-color: var(--board-border);
     color: var(--board-bg);
+}
+
+#footer{
+    font-size: 1rem;
+    color: var(--bg-color);
+    text-decoration: none;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    padding: 1rem;
+    width: 100%;
+    text-align: center;
+    background-color: var(--board-bg);
 }

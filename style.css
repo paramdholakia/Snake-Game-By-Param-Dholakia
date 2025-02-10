@@ -1,0 +1,61 @@
+:root {
+    --bg-color: #0f380f;
+    --game-container-bg: #0f380f;
+    --board-border: #306230;
+    --board-bg: #8bac0f;
+    --cell-border: #9bbc0f;
+    --text-color: #9bbc0f;
+    --button-bg: #0f380f;
+    --button-border: #9bbc0f;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Press Start 2P', cursive;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: var(--bg-color);
+}
+
+#game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    background-color: var(--game-container-bg);
+}
+
+#game-board {
+    border: 4px solid var(--board-border);
+    background-color: var(--board-bg);
+    image-rendering: pixelated;
+}
+
+#score-text {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    margin: 1rem 0;
+}
+
+#reset-btn {
+    font-size: 1rem;
+    width: 120px;
+    height: 40px;
+    border: 3px solid var(--button-border);
+    background-color: var(--button-bg);
+    color: var(--text-color);
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+#reset-btn:hover {
+    background-color: var(--board-border);
+    color: var(--board-bg);
+}

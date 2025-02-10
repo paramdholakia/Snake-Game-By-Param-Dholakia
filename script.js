@@ -20,10 +20,6 @@ let yVelocity = 0;
 let foodX, foodY;
 let score = 0;
 let snake = [
-    { x: UNIT_SIZE * 4, y: 0 },
-    { x: UNIT_SIZE * 3, y: 0 },
-    { x: UNIT_SIZE * 2, y: 0 },
-    { x: UNIT_SIZE, y: 0 },
     { x: 0, y: 0 }
 ];
 let directionChanged = false; // Flag to prevent multiple direction changes in one frame

@@ -162,10 +162,6 @@ function displayGameOver() {
 
 function resetGame() {
     snake = [
-        { x: UNIT_SIZE * 4, y: 0 },
-        { x: UNIT_SIZE * 3, y: 0 },
-        { x: UNIT_SIZE * 2, y: 0 },
-        { x: UNIT_SIZE, y: 0 },
         { x: 0, y: 0 }
     ];
     xVelocity = UNIT_SIZE;

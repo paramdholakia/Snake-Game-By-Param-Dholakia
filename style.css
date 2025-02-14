@@ -23,6 +23,7 @@ body {
     align-items: center;
     min-height: 100vh;
     background-color: var(--bg-color);
+    
 }
 
 #game-container {
